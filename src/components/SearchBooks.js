@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import * as BooksAPI from './utils/BooksAPI'
+import * as BooksAPI from '../utils/BooksAPI'
+import ListBook from './ListBook'
 
 class SearchBooks extends Component {
 
@@ -66,32 +67,9 @@ class SearchBooks extends Component {
         <div className="search-books-results">
           <ol className="books-grid">
             {this.state.booksFound.map((book) => (
+              
               <li key={book.id}>
-                <div className="book">
-                  <div className="book-top">
-                    <div className="book-cover" style={{width: 128,height: 193,backgroundImage: book.imageLinks ? `url(${book.imageLinks.thumbnail})` : ""}}></div>
-                    <div className="book-shelf-changer">
-
-                      <select defaultValue={book.shelf?book.shelf:"none"} onChange={
-                        (event) => {
-                          const elem = event.target
-                          this.props.OnMoveBook(book, elem.options[elem.selectedIndex].value)
-                        }
-                      }>
-                        <option value="move" disabled>Move to...</option>
-                        {
-                          shelfs.map((shelf, index) => (
-                            <option key={index}
-                              value={shelf.id}>{shelf.description}</option>
-                          ))
-                        }
-                      </select>
-
-                    </div>
-                  </div>
-                  <div className="book-title">{book.title}</div>
-                  <div className="book-authors">{book.authors ? book.authors.join(', ') : ""}</div>
-                </div>
+                <ListBook book={book} shelfs={shelfs} OnMoveBook={this.props.OnMoveBook} /> 
               </li>
 
             ))}
