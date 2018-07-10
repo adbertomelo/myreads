@@ -21,11 +21,11 @@ class SearchBooks extends Component {
       let booksFoundWithShelf = []
       let bookFoundWithShelf = null
 
-      results.map((bookFound) => {
+      results.forEach((bookFound) => {
             
           bookFoundWithShelf = bookFound
 
-          let bookShelf = this.props.myBooks.find(b => b.id == bookFound.id)
+          let bookShelf = this.props.myBooks.find(b => b.id === bookFound.id)
 
           if (bookShelf)
           {
@@ -44,7 +44,7 @@ class SearchBooks extends Component {
   render() {
 
     //let booksFound = this.props.booksFound
-    let myBooks = this.props.myBooks
+    //let myBooks = this.props.myBooks
     let shelfs = this.props.shelfs
 
     return (
@@ -69,11 +69,7 @@ class SearchBooks extends Component {
               <li key={book.id}>
                 <div className="book">
                   <div className="book-top">
-                    <div className="book-cover" style={{
-                      width: 128,
-                      height: 193,
-                      backgroundImage: book.imageLinks ? `url(${book.imageLinks.thumbnail})` : ""
-                    }}></div>
+                    <div className="book-cover" style={{width: 128,height: 193,backgroundImage: book.imageLinks ? `url(${book.imageLinks.thumbnail})` : ""}}></div>
                     <div className="book-shelf-changer">
 
                       <select defaultValue={book.shelf?book.shelf:"none"} onChange={

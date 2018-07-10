@@ -20,14 +20,12 @@ class BooksApp extends React.Component {
   componentDidMount(){
     BooksAPI.getAll().then((results) => {
 
-      this.setState({ books: results })
-      
-      this.setState({shelfs: [
+      this.setState({ books: results, shelfs: [
         { "id": "currentlyReading", "description": "Currently Reading" },
         { "id": "wantToRead", "description": "Want To Read" },
         { "id": "read", "description": "Read" },
         { "id": "none", "description": "None" }
-      ]})
+      ] })
 
     })
   }
