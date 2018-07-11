@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from '../../../../../Users/Beto/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react'
 
 
 class ListBook extends Component {

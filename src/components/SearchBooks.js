@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from '../utils/BooksAPI'
 import ListBook from './ListBook'
-import SHELFS from '../constants/constants'
+import  * as shelfsTypes from '../constants/shelfsTypes'
 
 class SearchBooks extends Component {
 
@@ -45,9 +45,7 @@ class SearchBooks extends Component {
 
   render() {
 
-    //let booksFound = this.props.booksFound
-    //let myBooks = this.props.myBooks
-    let shelfs = SHELFS
+    let shelfs = shelfsTypes.SHELFS
 
     return (
       <div className="search-books">
