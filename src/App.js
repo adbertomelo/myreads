@@ -13,19 +13,15 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount(){
-    BooksAPI.getAll().then((results) => {
-
-      this.setState({ books: results })
-
-    })  
+    this.Refresh()
   }
 
   Refresh = () => {
     BooksAPI.getAll().then((results) => {
-
       this.setState({ books: results})
-
-    })
+    }).catch(function () {
+			this.setState({books: []});
+		})
 
   }
 
