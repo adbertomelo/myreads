@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from '../utils/BooksAPI'
 import ListBook from './ListBook'
+import SHELFS from '../constants/constants'
 
 class SearchBooks extends Component {
 
@@ -46,7 +47,7 @@ class SearchBooks extends Component {
 
     //let booksFound = this.props.booksFound
     //let myBooks = this.props.myBooks
-    let shelfs = this.props.shelfs
+    let shelfs = SHELFS
 
     return (
       <div className="search-books">

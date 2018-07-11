@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import ListBook from './ListBook'
+import SHELFS from '../constants/constants'
 
 class ListBooks extends Component{
 
 
   render()
   {
-    console.log(this.props)
 
     let books = this.props.books
     
-    let shelfs = this.props.shelfs
+    let shelfs = SHELFS
 
     return(
 
