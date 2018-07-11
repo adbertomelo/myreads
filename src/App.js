@@ -13,21 +13,27 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount(){
-    this.Refresh()
-  }
-
-  Refresh = () => {
     BooksAPI.getAll().then((results) => {
       this.setState({ books: results})
-    }).catch(function () {
-			this.setState({books: []});
-		})
+    }).catch(error => {
+      //não pensei no que fazer para mostrar mensagem de erro
+      console.log(error);
+    })
 
   }
 
+  
   MoveBook = (book, shelf) => {
-    BooksAPI.update(book, shelf).then((books) => {
-      this.Refresh()
+    BooksAPI.update(book, shelf).then(() => {
+      
+      let currentBook = book;
+      currentBook.shelf = shelf;
+      let booksUpd = this.state.books.filter(b => b.id !== currentBook.id).concat([ currentBook ])
+      this.setState( {books: booksUpd} )
+
+    }).catch(error => {
+      //não pensei no que fazer para mostrar mensagem de erro      
+      console.log(error);
     })
   }
 
