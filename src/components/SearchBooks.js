@@ -7,14 +7,39 @@ import  * as shelfsTypes from '../constants/shelfsTypes'
 class SearchBooks extends Component {
 
   state = {
-    booksFound: []
+    booksFound: [],
+    query:""
   }
 
-  searchBook = (value) => {
+  updateQuery = (query) =>{
 
-    BooksAPI.search(value).then((results) => {
+      if(!query){
+        this.setState({query:"", booksFound:[]})
+        return
+      }
 
-      if (results === undefined || results.error)
+      this.setState({
+        query: query,
+        booksFound:[]
+      }, () =>{
+        this.searchBook()
+      })
+
+  }
+
+  searchBook = () => {
+
+    const text = this.state.query
+
+    if(text.trim() === ""){
+      this.setState({query:"", booksFound:[]})
+      return
+    }
+
+    BooksAPI.search(text).then((results) => {
+
+
+      if (!this.state.query || results === undefined || results.error)
       {
         this.setState({booksFound:[]})
         return
@@ -56,7 +81,7 @@ class SearchBooks extends Component {
               placeholder="Search by title or author"
 
               onChange={
-                (event) => { this.searchBook(event.target.value) }
+                (event) => { this.updateQuery(event.target.value) }
               }
             />
 
