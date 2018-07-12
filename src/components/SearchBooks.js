@@ -58,9 +58,9 @@ class SearchBooks extends Component {
         return
       }
 
-      const theCurrQueryDifQueryState = text !== this.state.query
+      const theCurrQueryDiffQueryState = text !== this.state.query
       
-      if (theCurrQueryDifQueryState)
+      if (theCurrQueryDiffQueryState)
         return
 
       let booksFoundWithShelf = []
