@@ -52,13 +52,15 @@ class SearchBooks extends Component {
 
       const emptyResults = results.error?true:false
 
-      if (noResults)
+      if (emptyResults)
       {
         this.defEmptyBook()
         return
       }
 
-      if (text !== this.state.query)
+      const theCurrQueryDifQueryState = text !== this.state.query
+      
+      if (theCurrQueryDifQueryState)
         return
 
       let booksFoundWithShelf = []
