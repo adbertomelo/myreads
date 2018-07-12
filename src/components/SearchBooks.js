@@ -12,11 +12,8 @@ class SearchBooks extends Component {
   }
 
   updateQuery = (query) =>{
-
-      if(!query){
-        this.setState({query:"", booksFound:[]})
-        return
-      }
+    
+    console.log({upd:query})
 
       this.setState({
         query: query,
@@ -27,23 +24,42 @@ class SearchBooks extends Component {
 
   }
 
+  defEmptyBook = () => {
+    this.setState({booksFound:[]})
+  }
+
   searchBook = () => {
 
     const text = this.state.query
 
-    if(text.trim() === ""){
-      this.setState({query:"", booksFound:[]})
+    /*if (text.trim() === "")
+    {
+      this.defEmptyBook()
       return
-    }
+    }*/
 
     BooksAPI.search(text).then((results) => {
+      
+      console.log({text:text, query:this.state.query, results: results})
 
+      const noResults = !results
 
-      if (!this.state.query || results === undefined || results.error)
+      if (noResults)
       {
-        this.setState({booksFound:[]})
+        this.defEmptyBook()
         return
-      }          
+      }
+
+      const emptyResults = results.error?true:false
+
+      if (noResults)
+      {
+        this.defEmptyBook()
+        return
+      }
+
+      if (text !== this.state.query)
+        return
 
       let booksFoundWithShelf = []
       let bookFoundWithShelf = null
