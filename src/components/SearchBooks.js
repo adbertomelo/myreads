@@ -13,8 +13,6 @@ class SearchBooks extends Component {
 
   updateQuery = (query) =>{
     
-    console.log({upd:query})
-
       this.setState({
         query: query,
         booksFound:[]
@@ -24,7 +22,7 @@ class SearchBooks extends Component {
 
   }
 
-  defEmptyBook = () => {
+  defEmpty = () => {
     this.setState({booksFound:[]})
   }
 
@@ -32,35 +30,25 @@ class SearchBooks extends Component {
 
     const text = this.state.query
 
-    /*if (text.trim() === "")
+    if (text.trim() === "")
     {
-      this.defEmptyBook()
+      this.defEmpty()
       return
-    }*/
+    }
 
     BooksAPI.search(text).then((results) => {
       
-      console.log({text:text, query:this.state.query, results: results})
+      const noResultsOrEmptyResults = !results || results.error
 
-      const noResults = !results
-
-      if (noResults)
+      if (noResultsOrEmptyResults)
       {
-        this.defEmptyBook()
+        this.defEmpty()
         return
       }
 
-      const emptyResults = results.error?true:false
-
-      if (emptyResults)
-      {
-        this.defEmptyBook()
-        return
-      }
-
-      const theCurrQueryDiffQueryState = text !== this.state.query
+      const theCurrQueryDiffStateQuery = text !== this.state.query
       
-      if (theCurrQueryDiffQueryState)
+      if (theCurrQueryDiffStateQuery)
         return
 
       let booksFoundWithShelf = []
@@ -83,6 +71,8 @@ class SearchBooks extends Component {
 
         this.setState({booksFound:booksFoundWithShelf})
       
+    }).catch(error => {
+      console.log({error:error});
     }) 
   }
 
